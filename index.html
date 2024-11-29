@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz</title>
+    <style>
+                /* Definição de fontes e cores principais */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff; /* Cor de fundo suave, azul claro */
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Estilo do cabeçalho */
+        header {
+            background-color: #b22222; /* Vermelho natalino */
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 2em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        /* Estilo do container do quiz */
+        .quiz-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo das perguntas */
+        .question {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #b22222; /* Cor natalina vermelha */
+        }
+
+        /* Estilo para as alternativas */
+        .answers {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .answers li {
+            margin: 10px 0;
+        }
+
+        .answers input {
+            margin-right: 10px;
+        }
+
+        .answers label {
+            font-size: 1.2em;
+            background-color: #32cd32; /* Verde natalino */
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .answers label:hover {
+            background-color: #228b22;
+        }
+
+        /* Estilo do botão de enviar */
+        .submit-button {
+            background-color: #ffd700; /* Dourado */
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: #ffcc00;
+        }
+
+        /* Estilo das respostas corretas e incorretas */
+        .correct {
+            background-color: #32cd32;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            color: white;
+        }
+
+        .incorrect {
+            background-color: #ff4500;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            color: white;
+        }
+
+        /* Decoração de Natal - nevasca */
+        .snowflakes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            pointer-events: none;
+            animation: snowfall 10s linear infinite;
+        }
+
+        .snowflakes div {
+            position: absolute;
+            top: -10px;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: fall 5s linear infinite;
+        }
+
+        .snowflakes div:nth-child(1) {
+            width: 15px;
+            height: 15px;
+            left: 10%;
+            animation-duration: 8s;
+        }
+
+        .snowflakes div:nth-child(2) {
+            width: 10px;
+            height: 10px;
+            left: 50%;
+            animation-duration: 6s;
+        }
+
+        .snowflakes div:nth-child(3) {
+            width: 20px;
+            height: 20px;
+            left: 70%;
+            animation-duration: 10s;
+        }
+        .snowflakes div:nth-child(4) {
+            width: 12px;
+            height: 12px;
+            left: 30%;
+            animation-duration: 7s;
+            animation-delay: 2s;
+        }
+
+        .snowflakes div:nth-child(5) {
+            width: 18px;
+            height: 18px;
+            left: 80%;
+            animation-duration: 9s;
+            animation-delay: 4s;
+        }
+
+        /* Mais flocos com tamanhos variados */
+        .snowflakes div:nth-child(6) {
+            width: 14px;
+            height: 14px;
+            left: 20%;
+            animation-duration: 8s;
+            animation-delay: 1s;
+        }
+
+        .snowflakes div:nth-child(7) {
+            width: 16px;
+            height: 16px;
+            left: 60%;
+            animation-duration: 6s;
+            animation-delay: 3s;
+        }
+
+        .snowflakes div:nth-child(8) {
+            width: 13px;
+            height: 13px;
+            left: 40%;
+            animation-duration: 10s;
+            animation-delay: 5s;
+        }
+
+        .snowflakes div:nth-child(9) {
+            width: 22px;
+            height: 22px;
+            left: 90%;
+            animation-duration: 7s;
+            animation-delay: 2s;
+        }
+
+        /* Aumentando o número de flocos de neve */
+        .snowflakes div:nth-child(10) {
+            width: 10px;
+            height: 10px;
+            left: 15%;
+            animation-duration: 7s;
+            animation-delay: 0.5s;
+        }
+
+        .snowflakes div:nth-child(11) {
+            width: 18px;
+            height: 18px;
+            left: 75%;
+            animation-duration: 6s;
+            animation-delay: 4s;
+        }
+
+        .snowflakes div:nth-child(12) {
+            width: 14px;
+            height: 14px;
+            left: 50%;
+            animation-duration: 8s;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes snowfall {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+        #resultadofinal{
+            margin-left: 140px;
+        }
+    </style>
+</head>
+<body>
+    
+    <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Natal</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Inclua o arquivo CSS -->
+</head>
+<body>
+    <header>
+        <h1>Quiz de Natal</h1>
+    </header>
+
+    <div class="quiz-container">
+        <div class="question">
+            1. Qual é a sua cor favorita
+        </div>
+        <ul class="answers">
+            <li><input type="radio" class="radios" id="q1a" name="q1" value="a"><label for="q1a">Vermelho</label></li>
+            <li><input type="radio" class="radios"id="q1b" name="q1" value="b"><label for="q1b">branco</label></li>
+            <li><input type="radio" class="radios"id="q1c" name="q1" value="c"><label for="q1c">Amarelo</label></li>
+            <li><input type="radio" class="radios"id="q1d" name="q1" value="d"><label for="q1d">verde</label></li>
+        </ul>
+
+        <div class="question">
+            2. Qual é a melhor parte do natal?
+        </div>
+        <ul class="answers">
+            <li><input type="radio" class="radios"id="q2a" name="q2" value="a"><label for="q2a">presentes</label></li>
+            <li><input type="radio" class="radios"id="q2b" name="q2" value="b"><label for="q2b">ceia</label></li>
+            <li><input type="radio" class="radios"id="q2c" name="q2" value="c"><label for="q2c">familia unida</label></li>
+            <li><input type="radio" class="radios"id="q2d" name="q2" value="d"><label for="q2d">feriado</label></li>
+        </ul>
+        <div class="question">
+            3. qual sua comida natalina favorita?
+        </div>
+        <ul class="answers">
+            <li><input type="radio" class="radios"id="q3a" name="q3" value="a"><label for="q3a">frango assado</label></li>
+            <li><input type="radio" class="radios"id="q3b" name="q3" value="b"><label for="q3b">pavê</label></li>
+            <li><input type="radio" class="radios"id="q3c" name="q3" value="c"><label for="q3c">chester</label></li>
+            <li><input type="radio" class="radios"id="q3d" name="q3" value="d"><label for="q3d">panetone</label></li>
+        </ul>
+        <div class="question">
+            4. qual seu personagem favorito de natal?
+        </div>
+        <ul class="answers">
+            <li><input type="radio" class="radios"id="q4a" name="q4" value="a"><label for="q4a">Papai Noel</label></li>
+            <li><input type="radio" class="radios"id="q4b" name="q4" value="b"><label for="q4b">Jesus</label></li>
+            <li><input type="radio" class="radios"id="q4c" name="q4" value="c"><label for="q4c">renas</label></li>
+            <li><input type="radio" class="radios"id="q4d" name="q4" value="d"><label for="q4d">Krampus</label></li>
+        </ul>
+        <div class="question">
+            5. você gosta do natal?
+        </div>
+        <ul class="answers">
+            <li><input type="radio" class="radios"id="q5a" name="q5" value="a"><label for="q5a">sim</label></li>
+            <li><input type="radio" class="radios"id="q5b" name="q5" value="b"><label for="q5b">até que sim</label></li>
+            <li><input type="radio" class="radios"id="q5c" name="q5" value="c"><label for="q5c">mais ou menos</label></li>
+            <li><input type="radio" class="radios"id="q5d" name="q5" value="d"><label for="q5d">não</label></li>
+        </ul>
+
+        <!-- Repita a estrutura acima para as perguntas 3, 4 e 5 -->
+
+        <button class="submit-button" onclick="contarVotos()">Enviar Respostas</button>
+        <div id="resultadofinal">
+            
+        </div>
+
+    </div>
+    
+    <div class="snowflakes">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>    
+</body>
+<script>
+    function contarVotos() {
+        //criando contadores
+
+        var audio = new Audio('katching.mp3')
+        audio.addEventListener('canplaythrough', function () {
+            audio.play()
+        })
+
+        let contNoel = 0
+        let contJesus = 0
+        let contRena = 0
+        let contKrampus = 0
+
+        //obter os radios da classe radios
+        let radios = document.getElementsByClassName('radios')
+
+        //percorrendo todos os elementos radios
+        for(let i=0; i< radios.length; i++){
+            //testar qual radio esta selecionado
+            if (radios[i].checked) {
+                if (radios[i].value == 'a') {
+                    contNoel++;
+                }
+                else if(radios[i].value == 'b') {
+                    contJesus++;
+                } 
+                else if(radios[i].value == 'c') {
+                    contRena++;
+                } 
+                else {
+                    contKrampus++;
+                }
+            }
+        }
+        //colocando contadores do h1
+        //document.getElementById('jotaro').innerHTML = "Votos jotaro "+contBela
+        //document.getElementById('josuke').innerHTML = "Votos josuke "+contBranca
+        //document.getElementById('giorno').innerHTML = "Votos giorno "+contElsa
+        //document.getElementById('johnny').innerHTML = "Votos johnny "+contVenelope
+
+        let resultado = document.getElementById('resultadofinal')
+        let imagem = document.getElementById('show')
+        if (contNoel > contJesus && contNoel > contRena && contNoel > contKrampus) {
+            resultado.style.backgroundImage = 'url(https://i.pinimg.com/originals/a7/cf/fc/a7cffca2c7ad81928298312b6c0e70f5.jpg)'
+            resultado.style.width = '500px'
+            resultado.style.height = '500px'
+        } else if (contJesus > contRena && contJesus > contKrampus){
+            resultado.style.color = 'blue'
+            resultado.style.backgroundImage = 'url(https://i.pinimg.com/550x/b8/cf/d7/b8cfd79a99a24b0b91f41ea46bd156d8.jpg)'
+            resultado.style.width = '500px'
+            resultado.style.height = '500px'
+            resultado.style.backgroundSize = 'cover'
+            resultado.style.backgroundRepeat = 'norepeat'
+        } else if(contRena > contKrampus){
+            resultado.style.backgroundImage = 'url(https://preview.redd.it/animals-on-steroids-part-2-v0-iny9258ou7bc1.png?width=1024&format=png&auto=webp&s=d7223669dd837e3027cb563ce3e58dda1f096aec)'
+            resultado.style.width = '500px'
+            resultado.style.height = '500px'
+            resultado.style.backgroundSize = 'cover'
+        } else {
+            resultado.style.backgroundImage = 'url(https://miro.medium.com/v2/resize:fit:1024/1*fL4L-o-eHj1I_LyCEYhLbw.jpeg)'
+            resultado.style.width = '500px'
+            resultado.style.height = '500px'
+            resultado.style.backgroundSize = 'cover'
+        }
+
+
+
+        //localStorage.setItem('contBela', contBela)
+        //localStorage.setItem('contBranca', contBranca)
+        //localStorage.setItem('contFrozen', contElsa)
+        //localStorage.setItem('contVanelope', contVenelope)
+    }
+</script>
+</html>
